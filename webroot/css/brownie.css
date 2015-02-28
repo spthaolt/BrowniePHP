@@ -228,7 +228,25 @@ a{
 	height: 40px;
 	line-height: 40px;
 	float: left;
-	padding: 0 20px;
+	padding: 0 14px;
+}
+
+#toggle-menu{
+	float: left;
+}
+
+#toggle-menu a{
+	float: left;
+	width: 18px;
+	height: 15px;
+	background: url(img/toggle-menu.png) 0 0 no-repeat;
+	overflow: hidden;
+	margin: 14px 0 0 14px;
+	padding: 0;
+}
+
+#toggle-menu a.toggle-hidden{
+	background-position: 0 -100px;
 }
 
 #options-bar ul{
@@ -525,6 +543,62 @@ th a:hover{
 	background: #444;
 }
 
+#content table .delete_multiple{
+	vertical-align: top;
+	text-align: center;
+	padding: 8px 5px;
+	margin: 0;
+	width: 1px;
+}
+
+#content table th.delete_multiple{
+	padding-top: 12px;
+}
+
+#content .model-index table tr .delete_multiple input{
+	margin: 0;
+	padding: 0;
+}
+
+#content form#deleteMultiple{
+	margin: 0;
+	width: auto;
+	padding: 0;
+}
+
+#content form#deleteMultiple div.submit{
+	margin: 0 0 10px 0;
+	padding: 0;
+}
+
+#content form#deleteMultiple div.submit button{
+	margin: 0;
+	padding: 0;
+}
+
+#content form#deleteMultiple div.submit button span{ 
+	font-size: 11px;
+	background-image: url(ico/16x16/delete.png);
+	background-position: left center;
+	background-repeat:	no-repeat;
+	padding: 2px 4px 2px 19px;
+	display: block;
+	cursor: default;
+}
+
+#deleteCheckAll{
+	visibility: hidden;
+}
+
+tr.checked{
+	background-color: #FFFFCC;
+	color: #444;
+}
+
+tr.hover{
+	background: #E1EBF5;
+}
+
 div.view td, td.field, p.norecords{
 	padding: 7px;
 }
@@ -547,18 +621,31 @@ th.actions{
 	text-transform: uppercase;
 }
 
-th.actions{
+th.actions, th.index_image{
 	overflow: hidden;
 	text-align: left;
 	padding-left: 10px;
 	padding-right: 10px;
+	color: #fff;
+	width: 10px;
 }
 
 table td.actions{
-	vertical-align: middle;
+	vertical-align: top;
 	line-height: 1.9em;
 	text-align: left;
-	padding: 0 8px;
+	padding: 3px 8px;
+}
+
+table td.index_image{
+	text-align: center;
+	padding: 0;
+	vertical-align: middle;
+	padding: 7px;
+}
+
+table td.index_image a img{
+	margin: 0;
 }
 
 ul.actions{
@@ -594,8 +681,8 @@ ul.actions li a:hover{
 }*/
 
 ul.actions a{
-	background: 4px center no-repeat;
-	padding-left: 26px;
+	background: 0 0 no-repeat;
+	padding-left: 20px;
 	padding-right: 10px;
 	color: #444;
 	font-weight: bold;
@@ -604,6 +691,10 @@ ul.actions a{
 
 li.view a{
 	background-image: url(ico/16x16/edit-find.png);
+}
+
+li.index a{
+	background-image: url(ico/16x16/list.png);
 }
 
 li.add a{
@@ -783,6 +874,10 @@ div.index div.actions ul li.export a{
 	background-image: url(img/export.png);
 }
 
+/*div.index div.actions ul li.global_custom_action a{
+	background-image: url(ico/32x32/applications-system.png);
+}*/
+
 div.index div.actions ul li.add-images a{
 	background-image: url(ico/32x32/insert-image.png);
 }
@@ -899,9 +994,16 @@ div.checkbox label{
 	vertical-align: bottom;
 }
 
- #footer{
+#footer{
 	clear: both;
 	height: 40px;
+}
+
+div.submit a.cancel{
+	line-height: 25px;
+	margin-left: 15px;
+	padding-left: 15px;
+	border-left: 1px solid #ccc;
 }
 
 /* uploads */
@@ -1057,7 +1159,7 @@ div#content fieldset.comboselect {
 div#content fieldset.comboselect * {
 	display: block;
 	float: left;
-	width: 45%;
+	width: 40%;
 }
 
 div#content fieldset.comboselect select {
@@ -1068,7 +1170,7 @@ div#content fieldset.comboselect select {
 
 div#content fieldset.comboselect fieldset {
 	border: 0;
-	width: 40px;
+	width: 80px;
 	margin: 0;
 	padding-top: 25px;
 }
@@ -1076,6 +1178,7 @@ div#content fieldset.comboselect fieldset {
 div#content fieldset.comboselect fieldset input {
 	width: 100%;
 	clear: left;
+	font-size: 11px;
 	margin: 5px 0;
 }
 
@@ -1238,6 +1341,7 @@ td.habtm li a{
 	display: block;
 	color: #444;
 	-moz-border-radius: 4px;
+	border-radius: 4px;
 	background: #ccc;
 }
 
@@ -1246,7 +1350,6 @@ td.habtm li a:hover{
 	background-color: #666;
 	text-decoration: none;
 }
-
 
 div#content form.filter{
 	vertical-align: middle;
@@ -1257,23 +1360,67 @@ div#content form.filter{
 	width: auto;
 }
 
-div#content form.filter div.input, div#content form.filter div.submit{
+form.filter div.advanced{
+	display: none;
+}
+
+a#show_advanced{
+	margin-left: 5px;
+	float: right;
+	color: #444;
+	position: absolute;
+	width: 100px;
+}
+
+div#content form.filter div.input, div#content form.filter div.submit, div#content form.filter div.text{
 	float: left;
 	clear: none;
 	margin: 0;
 	padding: 10px 10px 0 0;
 }
 
+div#content form.filter div.text{
+	margin-right: 4px;
+}
+
 div#content form.filter div.submit{
-	margin-top: 25px;
+	margin-top: 27px;
 	padding: 0;
 }
 
 div#content form.filter div.input select{
 	max-width: 150px;
+	padding: 2px 1px 1px 1px;
 }
 
-div#content form.filter div.input select{
-	border: 1px solid #888;
+div#content form.filter div.input select, div#content form.filter div.input input{
+	border: 1px solid #d3d3d3;
 }
 
+div#content form.filter div.input input{
+	font-size: 11px;
+	padding: 4px 2px 5px 2px;
+}
+
+#content form div#enabledLangs label, #content form div#enabledLangs div{
+	float: left;
+	clear: none;
+}
+
+div#enabledLangs label.enabledLangs{
+	padding: 6px;
+}
+
+#content form.filter input.filter-choose{
+	padding: 1px;
+	font-size: 12px;
+	width: 100px;
+}
+
+#content form.filter input.number{
+	width: 70px;
+}
+
+.filter-checkbox{
+	display: none;
+}
